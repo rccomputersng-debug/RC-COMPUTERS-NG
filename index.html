@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:action='data:blog.repoUrl' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+    <meta charset='utf-8'/>
+    <meta content='width=device-width,initial-scale=1,maximum-scale=1' name='viewport'/>
+    <title><data:blog.pageTitle/></title>
+    
+    <b:include data='blog' name='all-head-content'/>
+
+    <b:skin><![CDATA[
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #fcfcfc; color: #1a1a1a; transition: all 0.4s ease; overflow-x: hidden; }
+        body.dark-mode { background: #0f0f0f; color: #e0e0e0; }
+        #main-section { display: none; }
+        
+        :root { 
+            --primary-dark: #0a0a0b; 
+            --accent-gold: #d4af37; 
+            --gmail-red: #DB4437; 
+            --wa-green: #25D366;
+            --luxury-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --form-shadow: 0 15px 45px rgba(212, 175, 55, 0.15);
+        }
+    ]]></b:skin>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' rel='stylesheet'/>
+    
+    <style type='text/css'>
+    /* <![CDATA[ */
+        body { margin:0; scroll-behavior: smooth; width: 100%; }
+        .sticky-header { position: fixed; top: 0; width: 100%; z-index: 9999; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        body.dark-mode .sticky-header { background: rgba(15, 15, 15, 0.98); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        .top-bar { background: var(--primary-dark); color: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+        .top-bar a { color: white; text-decoration: none; }
+
+        .header-main { padding: 15px; display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto; }
+        .logo-text { font-size: 20px; font-weight: 900; color: var(--primary-dark); text-decoration:none; }
+        body.dark-mode .logo-text { color: #fff; }
+        
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #444; font-weight: 700; font-size: 15px; text-transform: uppercase; }
+        body.dark-mode .nav-links a { color: #bbb; }
+
+        /* SLIDER SETTINGS */
+        .hero-section { position: relative; height: 500px; background: #000; overflow: hidden; margin-top: 100px; }
+        .mySlides { display: none; width: 100%; height: 100%; background-size: cover; background-position: center; position: absolute; }
+        .slide-overlay { position: absolute; CENTRE: 30px; left: 25px; right: 20px; background: rgba(0,0,0,0.8); color: #fff; padding: 35px; border-left: 10px solid var(--accent-gold); max-width: 480px; z-index: 5; }
+
+        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 20px; max-width: 1300px; margin: 0 auto; }
+        .cat-box { background: #fff; padding: 30px 5px; text-align: center; box-shadow: var(--luxury-shadow); text-decoration: none; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
+        body.dark-mode .cat-box { background: #1a1a1b; color: #fff; }
+        .cat-box i { font-size: 24px; margin-bottom: 15px; color: var(--accent-gold); }
+        .cat-box span { font-size: 15px; font-weight: 800; letter-spacing: 1px; }
+
+        .about-section { padding: 80px 20px; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .about-text h2 { font-size: 38px; margin-bottom: 20px; font-weight: 900; color: var(--primary-dark); text-transform: uppercase; }
+        body.dark-mode .about-text h2 { color: var(--accent-gold); }
+        .about-text p { font-size: 18px; font-weight: 700; line-height: 1.8; color: #333; }
+        body.dark-mode .about-text p { color: #eee; }
+        .about-image { height: 400px; background-size: cover; background-position: center; border-radius: 4px; box-shadow: 15px 15px 0px var(--accent-gold); }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
+        .service-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: var(--luxury-shadow); display: flex; flex-direction: column; }
+        body.dark-mode .service-card { background: #1a1a1b; }
+        .service-img { height: 180px; background-size: cover; background-position: center; }
+        .service-info { padding: 20px; text-align: center; flex-grow: 1; }
+        .service-actions { display: flex; }
+        .srv-btn { flex: 1; padding: 15px; text-decoration: none; font-weight: 700; font-size: 11px; text-align: center; color: white; }
+        .srv-wa { background: var(--wa-green); }
+        .srv-gm { background: var(--gmail-red); }
+
+        .form-section { padding: 80px 20px; background: #f9f9f9; }
+        body.dark-mode .form-section { background: #0a0a0b; }
+        .form-container { max-width: 700px; margin: 0 auto; background: linear-gradient(145deg, #ffffff, #f0f0f0); padding: 45px; border-radius: 20px; box-shadow: var(--form-shadow); border: 2px solid var(--accent-gold); transition: 0.4s; }
+        body.dark-mode .form-container { background: linear-gradient(145deg, #1a1a1b, #111); border-color: #333; }
+        .form-container h2 { text-align: center; color: var(--primary-dark); font-weight: 900; margin-bottom: 30px; letter-spacing: 2px; }
+        body.dark-mode .form-container h2 { color: #fff; }
+        .form-input { width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; background: #fff; }
+        body.dark-mode .form-input { background: #000; border-color: #444; color: white; }
+        .btn-row { display: flex; gap: 15px; margin-top: 15px; }
+        .submit-btn { flex: 1; padding: 18px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; color: white; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; }
+        .btn-wa { background: var(--wa-green); }
+        .btn-gm { background: var(--gmail-red); }
+
+        footer { background: var(--primary-dark); color: #fff; padding: 50px 20px 20px; }
+        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .footer-col h4 { color: var(--accent-gold); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px; }
+        .footer-col p { font-size: 13px; font-weight: 400; line-height: 1.6; color: #aaa; margin: 0; }
+        .footer-social { margin-top: 15px; display: flex; gap: 15px; }
+        .footer-social a { color: #888; font-size: 18px; transition: 0.3s; }
+        .footer-bottom { border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; text-align: center; font-size: 11px; color: #555; }
+
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            /* COMPACT HEADER */
+            .top-bar { padding: 5px 10px; font-size: 10px; }
+            .header-main { padding: 8px 10px; }
+            .logo-text { font-size: 13px; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 10px; }
+
+            /* COMPACT SLIDER */
+            .hero-section { height: 220px; margin-top: 75px; }
+            .slide-overlay { bottom: 71px; left: 10px; right: 10px; padding: 12px; max-width: 100%; border-left-width: 3px; }
+            .slide-overlay h2 { font-size: 22px; margin: 0 0 5px 0; }
+            .slide-overlay p { font-size: 16px; margin: 0; }
+
+            .category-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 10px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px; }
+            .about-section { grid-template-columns: 1fr; text-align: center; padding: 30px 15px; }
+            .about-text h2 { font-size: 24px; }
+            .about-text p { font-size: 15px; }
+            .about-image { order: -1; height: 180px; margin-bottom: 15px; box-shadow: 8px 8px 0px var(--accent-gold); }
+            .form-container { padding: 20px 15px; margin: 0 5px; }
+            .btn-row { flex-direction: column; gap: 10px; }
+            .submit-btn { padding: 14px; font-size: 13px; }
+        }
+    /* ]]> */
+    </style>
+</head>
+<body>
+
+    <div class='sticky-header'>
+        <div class='top-bar'>
+            <div class='top-left'>
+                <a expr:href='&quot;https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=rc.computers.ng@gmail.com&quot;' target='_blank'>
+                    <i class='fas fa-envelope' style='color:var(--accent-gold);'/> rc.computers.ng@gmail.com
+                </a>
+                <span style='margin-left:10px;'><i class='fas fa-phone' style='color:var(--accent-gold);'/> 07069516784</span>
+            </div>
+            <div class='top-right'>
+                <a href='#' style='margin-right:8px;'><i class='fab fa-facebook-f' style='color:white'/></a>
+                <a href='#'><i class='fab fa-instagram' style='color:white'/></a>
+                <span class='mode-switch' onclick='toggleDarkMode()' style='margin-left:10px; display:inline-block; width:26px; height:13px; background:#444; border-radius:10px; cursor:pointer;'/>
+            </div>
+        </div>
+        <header class='header-main'>
+      <div style='display: flex; align-items: center; justify-content: flex-start; gap: 10px;'>
+  <a href='/' style='display: flex; align-items: center; text-decoration: none; border: none;'>
+    <div style='width: 45px; height: 45px; background-color: #ffffff; border: 2px solid #ffffff; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0;'>
+      <img alt='RC Logo' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicmgED-iW3uZFUB6FgrsGX3qGHmURXS29dKJWF5t3SwEzypQ_vP3tjC88VllMYFvjAB6Yz_VT4VeLqgwc_bvwHT6LAGtAKmnPgvfrWJSG9jiW3csB6FABpDcxwGDKMr7vs66srKnAd9cxK20Mh16Wrta-PidZuQPblPmfOz4cfv-WYc5GaB2q-UI26MO6f/s1600/HIGH%20DEF%20RCC%20NO%20BG.png' style='width: 100%; height: 100%; object-fit: contain; display: block;'/>
+    </div>
+    <span style='margin-left: 10px; color: inherit; font-size: 17px; font-weight: 900; white-space: nowrap;'>RC COMPUTERS NG</span>
+  </a>
+</div>
+            <nav class='nav-links'>
+                <a href='/'>Home</a>
+                <a href='#about'>About</a>
+                <a href='#services'>Services</a>
+            </nav>
+        </header>
+    </div>
+
+    <section class='hero-section'>
+         <div class='mySlides' style='background-image: url(https://www.slideteam.net/media/catalog/product/cache/1280x720/c/o/consumer_electronics_ai_image_powerpoint_presentation_ppt_ecs_slide01.jpg); display:block;'>
+                <div class='slide-overlay'><h2>COMPUTER STORE</h2><p>Premium Laptops &amp; Desktops.</p></div>
+            </div>
+            <div class='mySlides' style='background-image: url(https://www.techspot.com/images2/news/bigimage/2022/09/2022-09-11-image-13.jpg);'>
+                <div class='slide-overlay'><h2>Expert Repairs</h2><p>Motherboard &amp; Chip Level Fixing.</p></div>
+            </div>
+            <div class='mySlides' style='background-image: url(https://uestore.in/wp-content/uploads/2024/05/Mobile-and-Computer-Accessories-Shop.webp);'>
+                <div class='slide-overlay'><h2>Phone Gadgets</h2><p>Original Accessories.</p></div>
+            </div>
+            <div class='mySlides' style='background-image: url(https://solichmusic.com/wp-content/uploads/2023/12/DSC02000_Columbus-scaled.jpg);'>
+                <div class='slide-overlay'><h2>Music Store</h2><p>Concert-Standard Instruments.</p></div>
+            </div>
+            <div class='mySlides' style='background-image: url(https://cdn.pixabay.com/photo/2023/05/16/10/53/technology-7997258_1280.jpg);'>
+                <div class='slide-overlay'><h2>RC COMPUTERS NG</h2><p>Your Technology Partner.</p></div>
+        </div>
+    </section>
+
+    <div class='category-grid'>
+        <a class='cat-box' href='javascript:void(0)' onclick='showForm(&quot;buy-form&quot;)'><i class='fas fa-laptop'/><span>BUY COMPUTER</span></a>
+        <a class='cat-box' href='javascript:void(0)' onclick='showForm(&quot;fix-form&quot;)'><i class='fas fa-tools'/><span>FIX COMPUTER</span></a>
+        <a class='cat-box' href='javascript:void(0)' onclick='showForm(&quot;phone-acc-form&quot;)'><i class='fas fa-mobile-alt'/><span>PHONE ACCS</span></a>
+        <a class='cat-box' href='javascript:void(0)' onclick='showForm(&quot;comp-acc-form&quot;)'><i class='fas fa-server'/><span>COMP ACCS/SSDS</span></a>
+    </div>
+
+    <div id='dynamic-form-container' style='display:none; max-width:700px; margin: 20px auto; padding: 30px; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #d4af37;'>
+        <div id='form-content'/>
+        <div style='text-align:center; margin-top:20px;'>
+            <button onclick='document.getElementById(&quot;dynamic-form-container&quot;).style.display=&quot;none&quot;' style='background:#f44336; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;'>CANCEL / CLOSE</button>
+        </div>
+    </div>
+
+    <section class='about-section' id='about'>
+        <div class='about-text'>
+            <h2>About RC COMPUTERS NG</h2>
+            <p>Welcome to Nigeria&#39;s premier hub for advanced technology solutions. We specialize in the sale, custom assembly, and expert repair of high-performance computing systems, alongside specialized data recovery and premium gadget retail. Our mission is to deliver technical mastery through precision engineering and world-class service.</p>
+        </div>
+        <div class='about-image' style='background-image: url(https://img.freepik.com/premium-photo/electronics-store-interior-with-blue-lighting_1250527-3477.jpg?w=2000);'/>
+    </section>
+
+    <div class='services-grid' id='services'>
+        <div class='service-card'>
+            <div class='service-img' style='background-image: url(https://img.freepik.com/premium-photo/computer-shop-counter-with-customer-service_933496-6014.jpg?w=2000);'/>
+            <div class='service-info'><h3>BUY COMPUTER</h3></div>
+            <div class='service-actions'>
+                <a class='srv-btn srv-wa' href='https://wa.me/2347069516784?text=Buy%20PC'>WA</a>
+                <a class='srv-btn srv-gm' href='mailto:rc.computers.ng@gmail.com'>GMAIL</a>
+            </div>
+        </div>
+        <div class='service-card'>
+            <div class='service-img' style='background-image: url(https://s3.amazonaws.com/cme_public_images/www_ehow_com/cdn-write.demandstudios.com/upload/6000/100/00/7/176107.jpg);'/>
+            <div class='service-info'><h3>CHIP LEVEL REPAIR</h3></div>
+            <div class='service-actions'>
+                <a class='srv-btn srv-wa' href='https://wa.me/2347069516784?text=Repair'>WA</a>
+                <a class='srv-btn srv-gm' href='mailto:rc.computers.ng@gmail.com'>GMAIL</a>
+            </div>
+        </div>
+        <div class='service-card'>
+            <div class='service-img' style='background-image: url(https://uestore.in/wp-content/uploads/2024/05/Mobile-and-Computer-Accessories-Shop.webp);'/>
+            <div class='service-info'><h3>ACCESSORIES</h3></div>
+            <div class='service-actions'>
+                <a class='srv-btn srv-wa' href='https://wa.me/2347069516784?text=Accs'>WA</a>
+                <a class='srv-btn srv-gm' href='mailto:rc.computers.ng@gmail.com'>GMAIL</a>
+            </div>
+        </div>
+        <div class='service-card'>
+            <div class='service-img' style='background-image: url(https://bizon-tech.com/i/ws/x5000.jpg);'/>
+            <div class='service-info'><h3>PC BUILD &amp; DATA</h3></div>
+            <div class='service-actions'>
+                <a class='srv-btn srv-wa' href='https://wa.me/2347069516784?text=Build'>WA</a>
+                <a class='srv-btn srv-gm' href='mailto:rc.computers.ng@gmail.com'>GMAIL</a>
+            </div>
+        </div>
+    </div>
+
+    <section class='form-section' id='request-form'>
+        <div class='form-container'>
+            <h2>BUY/FIX</h2>
+            <input class='form-input' id='wa-n' placeholder='Full Name' type='text'/>
+            <select class='form-input' id='wa-t'>
+                <option value='BUY'>I want to Buy Hardware</option>
+                <option value='FIX'>I need a Repair Service</option>
+            </select>
+            <textarea class='form-input' id='wa-d' placeholder='Please provide details (e.g., Laptop model, Issue description)...' rows='4'/>
+            <div class='btn-row'>
+                <a class='submit-btn btn-wa' href='javascript:void(0)' onclick='sendWA()'><i class='fab fa-whatsapp'/> WHATSAPP REQUEST</a>
+                <a class='submit-btn btn-gm' href='javascript:void(0)' onclick='sendEmail()'><i class='fas fa-envelope'/> EMAIL INQUIRY</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class='footer-grid'>
+            <div class='footer-col'>
+                <h4>RC COMPUTERS NG</h4>
+                <p>&#39;Experience Nigeria&#8217;s gold standard in specialized tech services. From complex motherboard circuitry to vital data recovery and premium retail, we are committed to mastering your technology with unrivaled precision and care</p>
+                <div class='footer-social'>
+                    <a href='#'><i class='fab fa-facebook-square'/></a>
+                    <a href='#'><i class='fab fa-instagram'/></a>
+                </div>
+            </div>
+            <div class='footer-col'>
+                <h4>Contact Info</h4>
+                <p>Abuja, Nigeria</p>
+                <p>+234 706 951 6784</p>
+                <p>rc.computers.ng@gmail.com</p>
+            </div>
+        </div>
+        <div class='footer-bottom'>&#169; 2026 RC COMPUTERS NG. All Rights Reserved.</div>
+    </footer>
+
+    <b:section id='main-section' showaddelement='yes'/>
+
+    <script type='text/javascript'>
+    // <![CDATA[
+        function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+function showForm(type) {
+            const container = document.getElementById('dynamic-form-container');
+            const content = document.getElementById('form-content');
+            container.style.display = 'block';
+            container.scrollIntoView({behavior: "smooth"});
+
+            if (type === 'buy-form') {
+                content.innerHTML = `
+                    <h2 style='text-align:center; color:#0a0a0b;'>BUY/BUILD COMPUTER</h2>
+                    <select id='b-brand' class='form-input'><option value=''>Select Brand</option><option>HP</option><option>Dell</option><option>Lenovo</option><option>Acer</option><option>Apple MacBook</option><option>Asus</option><option>Toshiba</option><option>Samsung</option></select>
+                    <select id='b-use' class='form-input'><option value=''>Type / Usage</option><option>School</option><option>Work / Office</option><option>Gaming</option><option>Graphics/Video</option><option>Coding</option></select>
+                    <select id='b-budget' class='form-input'><option value=''>Budget Range</option><option>₦150k - ₦400k</option><option>₦400k - ₦800k</option><option>₦800k - ₦1.5m</option><option>₦1.5m - ₦3m</option><option>₦3m - ₦5m+</option></select>
+                    <select id='b-mem' class='form-input'><option value=''>Memory (RAM/SSD)</option><option>8GB / 256GB SSD</option><option>16GB / 512GB SSD</option><option>16GB / 1TB SSD</option><option>32GB / 1TB SSD</option></select>
+                    <select id='b-gpu' class='form-input'><option value=''>Graphics</option><option>Integrated</option><option>NVIDIA GTX (4GB)</option><option>NVIDIA RTX (6GB+)</option></select>
+                    <select id='b-cpu' class='form-input'><option value=''>Processor</option><option>Core i3 / Ryzen 3</option><option>Core i5 / Ryzen 5</option><option>Core i7 / Ryzen 7</option><option>Core i9 / Ryzen 9</option></select>
+                    <input type='text' id='b-color' class='form-input' placeholder='Preferred Colour / Picture Customize'>
+                    <textarea id='b-desc' class='form-input' placeholder='Describe exactly what you want...' rows='3'></textarea>
+                    <div class='btn-row'>
+                        <button class='submit-btn btn-wa' onclick='sendComplexForm("WA", "BUY")'>SUBMIT TO WHATSAPP</button>
+                        <button class='submit-btn btn-gm' onclick='sendComplexForm("GM", "BUY")'>SUBMIT TO EMAIL</button>
+                    </div>`;
+            } else if (type === 'fix-form') {
+                content.innerHTML = `
+                    <h2 style='text-align:center; color:#0a0a0b;'>REPAIR FORM</h2>
+                    <input type='text' id='f-name' class='form-input' placeholder='Full Name'>
+                    <input type='text' id='f-model' class='form-input' placeholder='Computer Model'>
+                    <select id='f-prob' class='form-input'><option value=''>Select Problem</option><option>Motherboard / No Power</option><option>Screen Replacement</option><option>Battery/Charging</option><option>Slow / Hanging</option><option>Data Recovery</option></select>
+                    <textarea id='f-note' class='form-input' placeholder='Short note describing the issue...' rows='3'></textarea>
+                    <div class='btn-row'>
+                        <button class='submit-btn btn-wa' onclick='sendComplexForm("WA", "FIX")'>SUBMIT TO WHATSAPP</button>
+                        <button class='submit-btn btn-gm' onclick='sendComplexForm("GM", "FIX")'>SUBMIT TO EMAIL</button>
+                    </div>`;
+            } else {
+                const isPhone = type === 'phone-acc-form';
+                content.innerHTML = `
+                    <h2 style='text-align:center; color:#0a0a0b;'>${isPhone ? 'PHONE' : 'COMPUTER'} ACCESSORIES</h2>
+                    <select id='acc-item' class='form-input'>
+                        ${isPhone ? '<option>Chargers</option><option>Screen Guards</option><option>Cases</option><option>Powerbanks</option><option>Earbuds</option>' : '<option>Mouse/Keyboard</option><option>Laptop Bags</option><option>SSDs / HDD</option><option>USB Hubs</option>'}
+                    </select>
+                    <textarea id='acc-note' class='form-input' placeholder='Specify brand or details...'></textarea>
+                    <div class='btn-row'>
+                        <button class='submit-btn btn-wa' onclick='sendComplexForm("WA", "ACC")'>SUBMIT TO WHATSAPP</button>
+                        <button class='submit-btn btn-gm' onclick='sendComplexForm("GM", "ACC")'>SUBMIT TO EMAIL</button>
+                    </div>`;
+            }
+        }
+
+        function sendComplexForm(method, category) {
+            let msg = "";
+            if (category === "BUY") {
+                msg = `RC BUY ORDER:\nBrand: ${document.getElementById('b-brand').value}\nUse: ${document.getElementById('b-use').value}\nBudget: ${document.getElementById('b-budget').value}\nMem: ${document.getElementById('b-mem').value}\nGPU: ${document.getElementById('b-gpu').value}\nCPU: ${document.getElementById('b-cpu').value}\nColor: ${document.getElementById('b-color').value}\nNote: ${document.getElementById('b-desc').value}`;
+            } else if (category === "FIX") {
+                msg = `REPAIR REQUEST:\nName: ${document.getElementById('f-name').value}\nModel: ${document.getElementById('f-model').value}\nProblem: ${document.getElementById('f-prob').value}\nNote: ${document.getElementById('f-note').value}`;
+            } else {
+                msg = `ACC ENQUIRY:\nItem: ${document.getElementById('acc-item').value}\nNote: ${document.getElementById('acc-note').value}`;
+            }
+            if (method === "WA") {
+                window.open(`https://wa.me/2347069516784?text=${encodeURIComponent(msg)}`, '_blank');
+            } else {
+                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=rc.computers.ng@gmail.com&su=Request&body=${encodeURIComponent(msg)}`, '_blank');
+            }
+        }
+        
+        function sendEmail() {
+            var n = document.getElementById('wa-n').value;
+            var t = document.getElementById('wa-t').value;
+            var d = document.getElementById('wa-d').value;
+            if(!n || !d) { alert('Please fill in your name and details.'); return; }
+            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=rc.computers.ng@gmail.com&su=' + encodeURIComponent('Request: ' + t) + '&body=' + encodeURIComponent('Name: ' + n + '\nDetails: ' + d), '_blank');
+        }
+
+        function sendWA() {
+            var n = document.getElementById('wa-n').value;
+            var t = document.getElementById('wa-t').value;
+            var d = document.getElementById('wa-d').value;
+            if(!n || !d) { alert('Please fill in your name and details.'); return; }
+            window.open('https://wa.me/2347069516784?text=' + encodeURIComponent('RC Request:\nName: ' + n + '\nAction: ' + t + '\nDetails: ' + d), '_blank');
+        }
+
+        var sIdx = 0;
+        function playSlides() {
+            var s = document.getElementsByClassName("mySlides");
+            if (s.length === 0) return;
+            for (var i = 0; i < s.length; i++) { s[i].style.display = "none"; }
+            sIdx++;
+            if (sIdx > s.length) { sIdx = 1; }
+            s[sIdx-1].style.display = "block";
+            setTimeout(playSlides, 4000);
+        }
+        window.addEventListener('load', playSlides);
+    // ]]>
+    </script>
+</body>
+</html>
